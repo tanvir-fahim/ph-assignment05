@@ -8,6 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>Git IT | Home</title>
 
 </head>
@@ -24,19 +29,15 @@
                 </h1>
             </div>
 
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center gap-4">
 
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm"></i>
-                    </span>
+                <div>
                     <input type="text" placeholder="Search issues..."
-                        class="block w-64 pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        class="pl-10 pr-3 py-2 border border-gray-300 rounded-md  bg-white placeholder-gray-500 sm:text-sm">
                 </div>
 
                 <button
-                    class="flex items-center px-4 py-2 bg-[#6320EE] hover:bg-[#5219d1] text-white text-sm font-semibold rounded-md transition-colors">
-                    <i class="fa-solid fa-plus mr-2"></i>
+                    class=" btn flex items-center px-4 py-2 bg-[#6320EE] hover:bg-[#5219d1] text-white text-sm font-semibold rounded-md">
                     New Issue
                 </button>
 
@@ -44,27 +45,31 @@
         </nav>
 
         <section>
-            <div class="p-6 bg-slate-50 min-h-[200px] flex items-center justify-center">
+            <div class="p-10 bg-slate-50 flex items-center justify-center">
                 <div
-                    class="w-full max-w-4xl bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-2">
+                    class="container mx-auto w-11/12 bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-center gap-2">
 
-                    <button class="btn border-none text-white normal-case min-h-10 h-10 px-8 hover:opacity-90"
+                    <button class="btn border-none text-white px-8"
                         style="background-color: #4B00FF;">
                         All
                     </button>
 
                     <button
-                        class="btn btn-outline border-gray-200 text-slate-500 normal-case min-h-10 h-10 px-8 hover:bg-gray-50 hover:border-gray-300 hover:text-slate-600">
+                        class="btn btn-outline border-gray-200 text-slate-500 px-8">
                         Open
                     </button>
 
                     <button
-                        class="btn btn-outline border-gray-200 text-slate-500 normal-case min-h-10 h-10 px-8 hover:bg-gray-50 hover:border-gray-300 hover:text-slate-600">
+                        class="btn btn-outline border-gray-200 text-slate-500 px-8">
                         Closed
                     </button>
 
                 </div>
             </div>
+        </section>
+
+        <section>
+            
         </section>
     </main>
 
