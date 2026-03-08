@@ -25,6 +25,8 @@ async function fetchCard(){
 function displayCard(cards){
     cards.forEach(item => {
         const cardDiv = document.createElement("div");
+        cardDiv.onclick = () => showModalDetails(item);
+        cardDiv.style.cursor = "pointer";
         cardDiv.innerHTML = `
             <div class="card bg-base-100 h-full shadow-xl border border-gray-100 overflow-hidden">
                 <div class="card-body p-5 gap-4 border-t-6 ${item.status == "open"?"border-green-500": "border-purple-500" }">
@@ -34,7 +36,7 @@ function displayCard(cards){
                                 <img src="${item.status == "open" ? "assets/Open-Status.png" : "assets/Closed-Status.png"}" alt="">
                             </div>
                         </div>
-                        <span class="badge badge-error badge-outline 
+                        <span class="badge badge-error badge-outline uppercase 
                                 ${item.priority === "medium" 
                                 ? "bg-orange-100 text-orange-400" 
                                 : item.priority === "low" 
@@ -117,6 +119,63 @@ function showLoading(){
 function hideLoading(){
     loadingSpinner.classList.remove("block");
     loadingSpinner.classList.add("hidden");
+}
+
+function showModalDetails(item) {
+    const modal = document.getElementById('cardsModal');
+
+    modal.innerHTML = `
+        <div class="modal-box max-w-3xl p-8 bg-white rounded-2xl shadow-2xl relative">
+            
+            <h3 class="text-3xl font-bold text-slate-800 mb-4">${item.title}</h3>
+
+            <div class="flex items-center gap-2 text-slate-500 text-sm mb-6">
+                <span class="badge ${item.status === 'open' ? 'bg-emerald-500' : 'bg-purple-500'} text-white border-none py-3 px-4 rounded-full uppercase text-[10px]">
+                    ${item.status === 'open'? item.status + "ed" : item.status}
+                </span>
+                <span>•</span>
+                <span>Opened by ${item.author}</span>
+                <span>•</span>
+                <span>${item.createdAt}</span>
+            </div>
+
+            <div class="flex gap-3 mb-8">
+                ${item.labels.map(label => `
+                    <div class="badge badge-outline border-slate-200 text-slate-500 bg-green-100 gap-1 px-3 py-3 uppercase font-bold text-[10px]">
+                        ${label}
+                    </div>
+                `).join('')}
+            </div>
+
+            <p class="text-slate-500 text-lg mb-10">
+                ${item.description}
+            </p>
+
+            <div class="bg-slate-50 rounded-xl p-6 flex justify-between items-start mb-8">
+                <div>
+                    <p class="text-slate-400 text-sm mb-1">Assignee:</p>
+                    <p class="text-slate-800 font-bold text-lg">${item.author}</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-slate-400 text-sm mb-1 text-left">Priority:</p>
+                    <span class="badge ${item.priority === 'high' ? 'bg-red-500' : item.priority === 'medium' ? 'bg-orange-500' : 'bg-indigo-500'} text-white border-none font-bold py-4 px-6 rounded-lg uppercase text-xs">
+                        ${item.priority}
+                    </span>
+                </div>
+            </div>
+
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn bg-[#6320EE] hover:bg-[#5219d1] text-white border-none px-8 rounded-lg">Close</button>
+                </form>
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>Close</button>
+        </form>
+    `;
+
+    modal.showModal();
 }
 
 fetchCard();
