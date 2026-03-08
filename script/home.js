@@ -1,12 +1,19 @@
 const loadingSpinner = document.getElementById("loadingSpinner");
 const cardContainer = document.getElementById("cardContainer");
 
+let cards = [];
+
+const issueCount = document.getElementById("issueCount");
+const allBtn = document.getElementById("allBtn");
+const openBtn = document.getElementById("openBtn");
+const closedBtn = document.getElementById("closedBtn");
+
 async function fetchCard(){
     showLoading();
     cardContainer.innerHTML = "";
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
-    const cards = data.data;
+    cards = data.data;
     // console.log(card);
     hideLoading();
 
@@ -20,7 +27,7 @@ function displayCard(cards){
         const cardDiv = document.createElement("div");
         cardDiv.innerHTML = `
             <div class="card bg-base-100 h-full shadow-xl border border-gray-100 overflow-hidden">
-                <div class="card-body p-5 gap-4 border-t-6 ${item.status == "open"?"border-green-500": "border-indigo-400" }">
+                <div class="card-body p-5 gap-4 border-t-6 ${item.status == "open"?"border-green-500": "border-purple-500" }">
                     <div class="flex justify-between items-center">
                         <div class="avatar placeholder">
                             <div>
@@ -66,6 +73,40 @@ function displayCard(cards){
         `
         cardContainer.appendChild(cardDiv);
     })
+
+    issueCount.innerText = `${cards.length} Issues`;
+}
+
+async function btnClicked(btnId) {
+    showActive(btnId);
+    showLoading();
+    cardContainer.innerHTML = "";
+
+    let filteredCards = [];
+
+    if (btnId === 'openBtn') {
+        filteredCards = cards.filter(item => item.status === "open");
+    } else if (btnId === 'closedBtn') {
+        filteredCards = cards.filter(item => item.status === "closed");
+    } else {
+        filteredCards = cards;
+    }
+
+    hideLoading();
+    displayCard(filteredCards);
+}
+
+function showActive(btnId) {
+    const buttons = [allBtn, openBtn, closedBtn];
+
+    buttons.forEach(btn => {
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-outline", "border-gray-200", "text-slate-500");
+    });
+
+    const selectedBtn = document.getElementById(btnId);
+    selectedBtn.classList.add("btn-primary");
+    selectedBtn.classList.remove("btn-outline", "border-gray-200", "text-slate-500");
 }
 
 function showLoading(){
