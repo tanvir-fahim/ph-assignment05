@@ -47,23 +47,21 @@ function displayCard(cards){
                         </span>
                     </div>
 
-                    <div>
+                    <div class = "flex-grow space-y-3">
                         <h2 class="card-title text-sm font-bold">
                             ${item.title}
                         </h2>
-                        <p class="text-slate-500 text-xs mt-2 line-clamp-2">
+                        <p class="text-slate-500 text-xs line-clamp-2">
                             ${item.description}
                         </p>
                     </div>
 
                     <div class="flex flex-wrap gap-2">
-                        <div class="badge badge-outline border-red-200 text-red-400 gap-1 p-3 bg-red-100 text-[9px] uppercase font-semibold">
-                            <span class="text-xs"></span> ${item.labels[0]}
-                        </div>
-                        <div
-                            class="badge badge-outline ${item.labels[1] == undefined ? "border-none": "border-orange-200 text-orange-500 bg-orange-100"}  gap-1 p-3 uppercase font-semibold text-[9px]">
-                            <span class="text-xs"></span> ${item.labels[1] == undefined ? "" : item.labels[1]}
-                        </div>
+                        ${item.labels.map(label => `
+                            <div class="badge badge-outline ${label === "enhancement"?"bg-green-100 text-green-500": label === "bug"? "bg-red-100 text-red-500": "bg-orange-100 text-orange-500"} gap-1 px-3 py-3 uppercase font-bold text-[9px]">
+                                    ${label}
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
 
@@ -94,8 +92,8 @@ async function btnClicked(btnId) {
         filteredCards = cards;
     }
 
-    hideLoading();
     displayCard(filteredCards);
+    hideLoading();
 }
 
 function showActive(btnId) {
