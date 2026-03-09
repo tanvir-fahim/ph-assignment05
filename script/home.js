@@ -180,7 +180,11 @@ function showModalDetails(item) {
 }
 
 function searchIssues() {
-    const searchText = searchInput.value.toLowerCase();
+    const searchText = searchInput.value.toLowerCase().trim();
+
+    if(searchText === ""){
+        return;
+    }
     
     showLoading();
     cardContainer.innerHTML = "";
