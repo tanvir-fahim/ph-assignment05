@@ -16,6 +16,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Fav Icon -->
+     <link rel="shortcut icon" href="assets/icons8-rocket-100.png" type="image/x-icon">
+
     <title>Git IT | Home</title>
 
 </head>
@@ -23,29 +26,28 @@
 <body>
 
     <main class="bg-slate-50">
-        <nav class="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200">
+        <nav
+            class="flex flex-col md:flex-row items-center justify-between px-4 md:px-8 py-4 bg-white border-b border-gray-200 gap-4 md:gap-0">
 
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-3 w-full justify-center md:justify-start">
                 <img src="assets/github-logo.png" alt="GitHub Logo" class="w-8 h-8">
-                <h1 class="text-sm sm:text-xl font-bold text-slate-800 tracking-tight">
+                <h1 class="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">
                     GitHub Issues Tracker
                 </h1>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center w-full md:max-w-[500px] gap-2 sm:gap-4">
 
-                <div class="relative">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
-
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     <input id="searchInput" type="text" placeholder="Search issues..."
-                        class="pl-10 pr-3 py-2 border border-gray-300 rounded-md bg-white placeholder-gray-500 sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#6320EE]">
+                        class="w-full pl-10 pr-5 py-2 border border-gray-300 rounded-md bg-white placeholder-gray-500 sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#6320EE]">
                 </div>
 
-                <button
-                    class=" btn flex items-center px-4 py-2 bg-[#6320EE] hover:bg-[#5219d1] text-white text-sm font-semibold rounded-md"
-                    onclick="searchIssues()">
+                <button onclick="searchIssues()"
+                    class="btn flex items-center justify-center px-4 py-2 bg-[#6320EE] hover:bg-[#5219d1] text-white text-sm font-semibold rounded-md whitespace-nowrap">
                     <i class="fa-solid fa-plus"></i>
-                    New Issue
+                    <span class="ml-1">New Issue</span>
                 </button>
 
             </div>
@@ -114,7 +116,7 @@
                 <span class="loading loading-spinner loading-xl"></span>
             </div>
             <!-- Card will be dynamically add using fetch -->
-            <div id="cardContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div id="cardContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             </div>
             <!-- Demo Card Layout -->
             <!-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
