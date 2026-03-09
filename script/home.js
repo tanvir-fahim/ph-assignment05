@@ -7,6 +7,7 @@ const issueCount = document.getElementById("issueCount");
 const allBtn = document.getElementById("allBtn");
 const openBtn = document.getElementById("openBtn");
 const closedBtn = document.getElementById("closedBtn");
+const searchInput = document.getElementById("searchInput");
 
 async function fetchCard(){
     showLoading();
@@ -78,6 +79,8 @@ function displayCard(cards){
 }
 
 async function btnClicked(btnId) {
+    searchInput.value = "";
+
     showActive(btnId);
     showLoading();
     cardContainer.innerHTML = "";
@@ -174,6 +177,29 @@ function showModalDetails(item) {
     `;
 
     modal.showModal();
+}
+
+function searchIssues() {
+    const searchText = searchInput.value.toLowerCase();
+    
+    showLoading();
+    cardContainer.innerHTML = "";
+
+    const searchedCards = cards.filter(item => {
+        const titleMatch = item.title.toLowerCase().includes(searchText);
+        const descMatch = item.description.toLowerCase().includes(searchText);
+        
+        return titleMatch || descMatch;
+    });
+
+    displayCard(searchedCards);
+    hideLoading();
+
+    const buttons = [allBtn, openBtn, closedBtn];
+    buttons.forEach(btn => {
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-outline", "border-gray-200", "text-slate-500");
+    });
 }
 
 fetchCard();
